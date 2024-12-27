@@ -1,0 +1,8 @@
+[
+    { "title": "Inception", "binder": 1, "genre": "Sci-Fi", "year": 2010 },
+    { "title": "The Dark Knight", "binder": 2, "genre": "Action", "year": 2008 },
+    { "title": "Interstellar", "binder": 1, "genre": "Sci-Fi", "year": 2014 },
+    { "title": "The Matrix", "binder": 3, "genre": "Sci-Fi", "year": 1999 },
+    { "title": "Avengers: Endgame", "binder": 4, "genre": "Action", "year": 2019 }
+  ]
+  

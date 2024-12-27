@@ -3,58 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>My Movie Collection</title>
+  <title>The Haris Movies Collection</title>
+  <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-  <!-- Header Section -->
-   <h1>The Harris Movies Collection</h1>
   <header>
-    <div id="search-bar">
-      <input type="text" id="search" placeholder="Search for a movie...">
-      <button id="search-btn">Search</button>
-    </div>
-    <nav id="categories">
-      <button id="genre-btn">Genres</button>
-      <ul id="genre-list" style="display: none;">
-        <li><a href="#action">Action</a></li>
-        <li><a href="#comedy">Comedy</a></li>
-        <li><a href="#drama">Drama</a></li>
-        <li><a href="#sci-fi">Sci-Fi</a></li>
-      </ul>
-    </nav>
+    <h1>The Harris Movies Collection</h1>
   </header>
-
-  <!-- Main Section -->
-  <main id="movie-container">
-    <h1>Movies (Alphabetical Order)</h1>
-    <ul>
-        <li><a href="details/inception.html">Inception</a></li>
-        <li><a href="details/matrix.html">The Matrix</a></li>
-        <li><a href="details/forrest-gump.html">Forrest Gump</a></li>
-        <li><a href="details/avatar.html">Avatar</a></li>
-        <li><a href="details/up.html">Up</a></li>
-    </ul>
-  </main>
-
-  <!-- Script Section -->
-  <script>
-    // JavaScript to toggle genre list visibility
-    document.getElementById('genre-btn').addEventListener('click', function () {
-      const genreList = document.getElementById('genre-list');
-      if (genreList.style.display === 'none') {
-        genreList.style.display = 'block';
-      } else {
-        genreList.style.display = 'none';
-      }
-    });
-
-    // (Optional) Sort movies dynamically if needed
-    const movieContainer = document.querySelector('#movie-container ul');
-    const movies = Array.from(movieContainer.children);
-    movies.sort((a, b) => a.textContent.localeCompare(b.textContent));
-    movieContainer.innerHTML = '';
-    movies.forEach(movie => movieContainer.appendChild(movie));
-  </script>
+  <div class="container">
+    <div class="search-section">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search movies...">
+        <button onclick="searchMovies()">Search</button>
+      </div>
+    </div>
+    <div class="binder-list" id="binderList"></div>
+  </div>
+  <script src="script/script.js"></script>
 </body>
 </html>
