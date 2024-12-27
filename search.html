@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results</title>
+  <link rel="stylesheet" href="styles/search.css">
+</head>
+<body>
+  <header>
+    <h1>Search Results</h1>
+    <button class="homeButton" onclick="goToHome()">Go to Home Page</button>
+  </header>
+
+  <div class="container">
+    <div id="searchResults" class="movie-list"></div>
+    <button class="homeButton" onclick="goToHome()">Go to Home Page</button>
+  </div>
+
+  <script>
+    function goToHome() {
+      window.location.href = "index.html";
+    }
+
+    // Fetch and display search results
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get('query')?.toLowerCase();
+
+      if (!query) {
+        document.getElementById('searchResults').innerHTML = '<p>No search term provided.</p>';
+        return;
+      }
+
+      fetch('movies.json')
+        .then(response => response.json())
+        .then(data => {
+          const results = data.filter(movie =>
+            movie.title.toLowerCase().includes(query) || movie.kind.toLowerCase().includes(query)
+          );
+
+          if (results.length > 0) {
+            displayResults(results);
+          } else {
+            document.getElementById('searchResults').innerHTML = '<p>No movies found matching your search.</p>';
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching movies:', error);
+          document.getElementById('searchResults').innerHTML = '<p>Error loading search results.</p>';
+        });
+    });
+
+    function displayResults(movies) {
+      const resultsContainer = document.getElementById('searchResults');
+      resultsContainer.innerHTML = ''; // Clear previous content
+      movies.forEach(movie => {
+        const movieItem = document.createElement('div');
+        movieItem.className = 'movie-item';
+        movieItem.innerHTML = `
+          <h3>${movie.title}</h3>
+          <p>Type: ${movie.kind} | Binder: ${movie.binder}, Page: ${movie.page}</p>
+        `;
+        resultsContainer.appendChild(movieItem);
+      });
+    }
+  </script>
+</body>
+</html>

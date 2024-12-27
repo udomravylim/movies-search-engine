@@ -14,12 +14,21 @@
     <div class="search-section">
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="Search movies...">
-        <button onclick="searchMovies()">Search</button>
+        <button onclick="performSearch()">Search</button>
       </div>
       <div id="searchResults" class="search-results"></div>
     </div>
     <div class="binder-list" id="binderList"></div>
   </div>
+  <script>
+    // Redirect to search.html with the query parameter
+    function performSearch() {
+      const searchTerm = document.getElementById('searchInput').value.trim();
+      if (searchTerm) {
+        window.location.href = `search.html?query=${encodeURIComponent(searchTerm)}`;
+      }
+    }
+  </script>
   <script src="script/script.js"></script>
 </body>
 </html>

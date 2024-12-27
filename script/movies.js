@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         movieDiv.className = 'movie-item';
         movieDiv.innerHTML = `
           <h3>${movie.title}</h3>
-          <p>Type: ${movie.kind}</p>
+          <p>Genre: ${movie.kind}, &nbsp;</p>
           <p>Page: ${movie.page}</p>
         `;
         movieList.appendChild(movieDiv);

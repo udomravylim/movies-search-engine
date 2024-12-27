@@ -1,0 +1,128 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  header {
+    background-color: #444;
+    color: white;
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  
+  /* Home Button Styling */
+  .homeButton {
+    margin: 1rem auto;
+    display: block; /* Center horizontally */
+    background-color: white;
+    color: #444;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .homeButton:hover {
+    background-color: #f0f0f0;
+    color: black;
+  }
+  
+  /* Container */
+  .container {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  /* Movie List Styling */
+  .movie-list {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .movie-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .movie-item:last-child {
+    border-bottom: none;
+  }
+  
+  .movie-item h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    flex-grow: 2;
+    text-align: left;
+  }
+  
+  .movie-item p {
+    margin: 0;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .movie-item:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+  /* Responsive Styles */
+  @media screen and (max-width: 768px) {
+    header h1 {
+      font-size: 1.5rem;
+    }
+  
+    .homeButton {
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+    }
+  
+    .movie-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .movie-item p {
+      text-align: left;
+      margin-top: 0.5rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    header h1 {
+      font-size: 1.2rem;
+    }
+  
+    .homeButton {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+    }
+  
+    .movie-item {
+      font-size: 0.9rem;
+    }
+  
+    .movie-item h3 {
+      font-size: 1rem;
+    }
+  }
+  
