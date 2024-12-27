@@ -1,67 +1,78 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById('searchInput');
+    const suggestionList = document.getElementById('searchResults');
     const binderList = document.getElementById('binderList');
   
     // Display all binders by default
     displayBinders();
   
-    // Fetch movie data and associate it with binders
-    fetch('movies.json')
-      .then(response => response.json())
-      .then(data => {
-        attachBinderClickEvents(data);
-      })
-      .catch(error => console.error('Error loading movie data:', error));
+    // Fetch data for search suggestions
+    searchInput.addEventListener('input', (event) => {
+      const searchTerm = event.target.value.toLowerCase();
+      if (searchTerm) {
+        fetch('movies.json')
+          .then(response => response.json())
+          .then(data => {
+            const filteredMovies = data.filter(movie =>
+              movie.title.toLowerCase().includes(searchTerm) || // Search by title
+              movie.kind.toLowerCase().includes(searchTerm)    // Search by type
+            );
+            displaySuggestions(filteredMovies);
+          })
+          .catch(error => console.error('Error fetching movies:', error));
+      } else {
+        suggestionList.innerHTML = ''; // Clear suggestions if input is empty
+      }
+    });
   
-    // Function to display all binders
+    // Function to display suggestions
+    function displaySuggestions(movies) {
+      suggestionList.innerHTML = ''; // Clear previous suggestions
+  
+      if (movies.length > 0) {
+        movies.forEach(movie => {
+          const suggestionItem = document.createElement('div');
+          suggestionItem.className = 'suggestion-item';
+          suggestionItem.innerHTML = `
+            <strong>${movie.title}</strong> (${movie.kind})<br>
+            Binder: ${movie.binder}, Page: ${movie.page}
+          `;
+  
+          // Click event to navigate to the movie's binder
+          suggestionItem.addEventListener('click', () => {
+            window.location.href = `movies.html?binder=${movie.binder}`;
+          });
+  
+          suggestionList.appendChild(suggestionItem);
+        });
+      } else {
+        suggestionList.innerHTML = '<div class="suggestion-item">No results found</div>';
+      }
+    }
+  
+    // Close suggestions when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!searchInput.contains(event.target) && !suggestionList.contains(event.target)) {
+        suggestionList.innerHTML = '';
+      }
+    });
+  
+    // Display all binders
     function displayBinders() {
       for (let i = 1; i <= 17; i++) {
         const binderDiv = document.createElement('div');
         binderDiv.className = 'binder';
         binderDiv.textContent = `Binder ${i}`;
-        binderDiv.setAttribute('data-binder', i); // Add a data attribute for the binder number
+        binderDiv.setAttribute('data-binder', i);
+  
+        // Navigate to movies.html when binder is clicked
+        binderDiv.addEventListener('click', () => {
+          const binderNumber = binderDiv.getAttribute('data-binder');
+          window.location.href = `movies.html?binder=${binderNumber}`;
+        });
+  
         binderList.appendChild(binderDiv);
       }
     }
-  
-    // Function to attach click events to binders
-    function attachBinderClickEvents(movies) {
-      const binders = document.querySelectorAll('.binder');
-      binders.forEach(binder => {
-        binder.addEventListener('click', () => {
-          const binderNumber = binder.getAttribute('data-binder');
-          const moviesInBinder = movies.filter(movie => movie.binder == binderNumber);
-          displayMovies(moviesInBinder, binderNumber);
-        });
-      });
-    }
-  
-    // Function to display movies in a specific binder
-    function displayMovies(movies, binder) {
-      if (movies.length > 0) {
-        alert(`Movies in Binder ${binder}:\n` + movies.map(movie => movie.title).join('\n'));
-      } else {
-        alert(`No movies found in Binder ${binder}.`);
-      }
-    }
   });
-  
-  // Search functionality remains the same
-  function searchMovies() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    fetch('movies.json')
-      .then(response => response.json())
-      .then(movies => {
-        const filteredMovies = movies.filter(movie => 
-          movie.title.toLowerCase().includes(searchTerm) ||
-          movie.genre.toLowerCase().includes(searchTerm) ||
-          movie.year.toString().includes(searchTerm)
-        );
-  
-        if (filteredMovies.length > 0) {
-          alert(`Search Results:\n` + filteredMovies.map(movie => movie.title).join('\n'));
-        } else {
-          alert("No movies found.");
-        }
-      });
-  }
   

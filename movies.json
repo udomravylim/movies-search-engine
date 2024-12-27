@@ -1,8 +1,18 @@
 [
-    { "title": "Inception", "binder": 1, "genre": "Sci-Fi", "year": 2010 },
-    { "title": "The Dark Knight", "binder": 2, "genre": "Action", "year": 2008 },
-    { "title": "Interstellar", "binder": 1, "genre": "Sci-Fi", "year": 2014 },
-    { "title": "The Matrix", "binder": 3, "genre": "Sci-Fi", "year": 1999 },
-    { "title": "Avengers: Endgame", "binder": 4, "genre": "Action", "year": 2019 }
+    { "title": "Inception", "kind": "Live", "binder": 1, "page": 5 },
+    { "title": "The Lion King", "kind": "Animated", "binder": 1, "page": 12 },
+    { "title": "The Dark Knight", "kind": "Live", "binder": 2, "page": 3 },
+    { "title": "Frozen", "kind": "Animated", "binder": 2, "page": 10 },
+    { "title": "Interstellar", "kind": "Live", "binder": 3, "page": 7 },
+    { "title": "Toy Story", "kind": "Animated", "binder": 3, "page": 15 },
+    { "title": "The Matrix", "kind": "Live", "binder": 4, "page": 2 },
+    { "title": "Moana", "kind": "Animated", "binder": 4, "page": 8 },
+    { "title": "Avengers: Endgame", "kind": "Live", "binder": 5, "page": 1 },
+    { "title": "Finding Nemo", "kind": "Animated", "binder": 5, "page": 6 },
+    { "title": "Gladiator", "kind": "Live", "binder": 6, "page": 4 },
+    { "title": "Shrek", "kind": "Animated", "binder": 6, "page": 9 },
+    { "title": "Jurassic Park", "kind": "Live", "binder": 7, "page": 13 },
+    { "title": "Coco", "kind": "Animated", "binder": 7, "page": 14 },
+    { "title": "Coco", "kind": "Animated", "binder": 7, "page": 14 }
   ]
   

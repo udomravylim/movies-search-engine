@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies in Binder</title>
+  <link rel="stylesheet" href="styles/movies.css">
+</head>
+<body>
+  <header>
+    <h1 id="binderTitle">Movies in Binder</h1>
+    <button id="homeButton" onclick="goToHome()">Go to Home Page</button>
+  </header>
+
+  <div class="container">
+    <div id="movieList" class="movie-list"></div>
+  </div>
+  
+  <script>
+    function goToHome() {
+      window.location.href = "index.html";
+    }
+  </script>
+  <script src="script/movies.js"></script>
+</body>
+</html>
