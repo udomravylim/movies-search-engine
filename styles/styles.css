@@ -1,208 +1,295 @@
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
+/* General Reset */
+* {
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
-  color: #333;
-  font-size: 16px;
-  line-height: 1.6;
-  overflow-x: hidden; /* Prevent horizontal scrolling globally */
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #f0f4f8, #d9e6f2);
+  color: #333333;
+  line-height: 1.6;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* Header */
 header {
-  background-color: #444;
-  color: white;
-  padding: 1.5rem 1rem;
   text-align: center;
+  padding: 20px 10px;
+  background: linear-gradient(135deg, #0077b6, #0096c7);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-bottom: 30px;
 }
 
 header h1 {
-  margin: 0;
   font-size: 2rem;
-  letter-spacing: 0.05rem;
+  color: #ffffff;
+  animation: fadeInDown 1.5s ease-out;
+  word-wrap: break-word;
 }
 
+/* Container */
 .container {
-  padding: 1rem;
+  max-width: 100%;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden;
 }
 
 /* Search Section */
 .search-section {
-  margin-bottom: 2rem;
-  text-align: left;
-  padding: 20px;
-}
-
-.search-box {
-  display: flex;
-  flex-direction: row; /* Changed to row */
-  align-items: center;
-  justify-content: center; /* Aligns horizontally in the center */
-  gap: 0.5rem;
   position: relative;
+  margin-bottom: 30px;
+  animation: slideIn 1.5s ease-out;
 }
 
-.search-box input {
-  flex: 1; /* Allow input to take remaining space */
-  max-width: 400px;
-  padding: 0.7rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.search-section .search-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.search-box button {
-  padding: 0.7rem 1.2rem;
-  font-size: 1rem;
-  background-color: #444;
-  color: white;
+.search-section input[type="text"] {
+  flex: 1;
+  padding: 10px 15px;
+  border: 2px solid #0077b6;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  color: #333333;
+}
+
+.search-section button {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #ffffff;
+  background: #0077b6;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-.search-box button:hover {
-  background-color: #666;
+.search-section button:hover {
+  background: #005f8a;
+  transform: scale(1.05);
 }
 
-/* Search Results Dropdown */
-.search-results {
+/* Suggestions Dropdown */
+.suggestions {
   position: absolute;
-  padding-left: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 10px;
-  width: 100%;
-  max-width: 400px;
-  background-color: #f7f7f7; /* Light gray background */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #0077b6;
+  border-radius: 5px;
   max-height: 200px;
-  z-index: 10;
+  overflow-y: auto;
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
 }
 
-/* Individual Suggestion Items */
-.search-results .search-item {
-  padding: 0.7rem 1rem;
-  border-bottom: 1px solid #eee;
+.suggestion-item {
+  padding: 10px 15px;
+  font-size: 14px;
   cursor: pointer;
-  text-align: left; /* Align text fully to the left */
-  background-color: #f7f7f7; /* Default light gray background */
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.search-results .search-item:hover {
-  background-color: #e0e0e0; /* Slightly darker gray background on hover */
-  color: #000; /* Change text color on hover */
-}
-
-.search-results .search-item:last-child {
-  border-bottom: none;
-}
-
-.search-results .search-item strong {
-  font-size: 1rem;
-  color: #333;
-  transition: color 0.3s ease;
-}
-
-.search-results .search-item strong:hover {
-  color: #007bff; /* Add hover effect for movie titles */
-}
-
-.search-results .search-item p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #666;
+.suggestion-item:hover {
+  background-color: #0077b6;
+  color: #ffffff;
 }
 
 /* Binder List */
 .binder-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
-.binder {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 1rem;
+.binder-list .binder {
+  padding: 20px;
+  background: linear-gradient(135deg, #caf0f8, #90e0ef);
+  border-radius: 5px;
+  color: #0077b6;
   text-align: center;
-  width: 100px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 1s ease-in;
 }
 
-.binder:hover {
-  background-color: #f7f7f7;
-  transform: scale(1.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.binder-list .binder:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  background: #0077b6;
+  color: #ffffff;
+}
+
+/* Add Movie Section */
+.add-movie-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #0077b6;
+  text-align: center;
+}
+
+.add-movie-section .form-group {
+  display: grid;
+  gap: 15px;
+}
+
+.add-movie-section input,
+.add-movie-section textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #0077b6;
+  font-size: 14px;
+  outline: none;
+  color: #333333;
+}
+
+.add-movie-section button {
+  padding: 10px;
+  font-size: 14px;
+  background: #52b788;
+  border: none;
+  color: #ffffff;
+  border-radius: 5px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.add-movie-section button:hover {
+  background: #40916c;
+  transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.modal-content {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-content h2 {
+  color: #0077b6;
+  margin-bottom: 15px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 2px solid #0077b6;
+  outline: none;
+  font-size: 14px;
+}
+
+.modal-content button {
+  padding: 10px;
+  background: #0077b6;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.modal-content button:hover {
+  background: #005f8a;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Responsive Styles */
-@media screen and (max-width: 768px) {
-  body {
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+@media (max-width: 768px) {
+  .search-section .search-box {
+    flex-direction: column;
+  }
+
+  .search-section input[type="text"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .search-section button {
+    width: 100%;
+  }
+
+  .binder-list {
+    grid-template-columns: 1fr;
   }
 
   header h1 {
-    font-size: 1.5rem;
-    padding: 1rem; /* Adjust padding to prevent overflow */
+    font-size: 1.8rem;
   }
 
-  .search-box input {
-    width: 90%; /* Ensure input fits within the viewport */
-    margin: 0 auto; /* Center the input */
+  .add-movie-section h2 {
+    font-size: 1.4rem;
   }
 
-  .search-results {
-    width: 90%; /* Match input width */
-    margin: 0 auto; /* Center the dropdown */
-  }
-
-  .binder {
-    width: calc(48% - 1rem); /* Ensure binders fit within the row */
-    margin: 0.5rem; /* Add margin for spacing */
-  }
-}
-
-@media screen and (max-width: 480px) {
-  body {
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-  }
-
-  header h1 {
-    font-size: 1.2rem;
-    padding: 0.5rem; /* Reduce padding for smaller screens */
-  }
-
-  .search-box {
-    flex-direction: column; /* Stack input and button on smaller screens */
-  }
-
-  .search-box input {
-    width: 100%; /* Take full width */
-    margin: 0; /* Remove unnecessary margins */
-  }
-
-  .search-results {
-    width: 90%; /* Match full screen width */
-    margin: 0 auto; /* Center the dropdown */
-  }
-
-  .binder {
-    width: calc(100% - 2rem); /* Fit one binder per row */
-    margin: 0rem auto; /* Center the binder with spacing */
-  }
-
-  .search-results .search-item {
-    font-size: 0.9rem;
-    padding: 0.5rem; /* Adjust padding for smaller items */
+  .add-movie-section button {
+    font-size: 13px;
   }
 }

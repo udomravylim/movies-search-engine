@@ -3,32 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Haris Movies Collection</title>
+  <title>The Harris Movies Collection</title>
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
   <header>
     <h1>The Harris Movies Collection</h1>
   </header>
+
   <div class="container">
+    <!-- Search Section -->
     <div class="search-section">
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search movies...">
-        <button onclick="performSearch()">Search</button>
+        <input type="text" id="searchInput" placeholder="Search movies..." aria-label="Search movies">
+        <button id="searchButton" aria-label="Search">Search</button>
       </div>
       <div id="searchResults" class="search-results"></div>
     </div>
-    <div class="binder-list" id="binderList"></div>
+
+    <!-- Movie Binder Section -->
+    <div class="binder-list" id="binderList">
+      <!-- Dynamic binder and movie content will be inserted here -->
+    </div>
+
+    <!-- Add New Movie Section -->
+    <div class="add-movie-section">
+      <h2>Add New Movie</h2>
+      <div class="form-group">
+        <input type="text" id="titleInput" placeholder="Movie Title" required>
+        <input type="text" id="kindInput" placeholder="Genre" required>
+        <input type="number" id="binderInput" placeholder="Binder Number" required>
+        <input type="number" id="pageInput" placeholder="Page Number" required>
+        <textarea id="moviesInput" placeholder="Movies in Collection (comma-separated, optional)"></textarea>
+        <button id="addMovieButton">Add Movie</button>
+      </div>
+    </div>
   </div>
-  <script>
-    // Redirect to search.html with the query parameter
-    function performSearch() {
-      const searchTerm = document.getElementById('searchInput').value.trim();
-      if (searchTerm) {
-        window.location.href = `search.html?query=${encodeURIComponent(searchTerm)}`;
-      }
-    }
-  </script>
+
+  <!-- Edit Movie Modal -->
+  <div id="editMovieModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>Edit Movie</h2>
+      <div class="form-group">
+        <input type="text" id="editTitleInput" placeholder="Movie Title" required>
+        <input type="text" id="editKindInput" placeholder="Genre" required>
+        <input type="number" id="editBinderInput" placeholder="Binder Number" required>
+        <input type="number" id="editPageInput" placeholder="Page Number" required>
+        <textarea id="editMoviesInput" placeholder="Movies in Collection (comma-separated, optional)"></textarea>
+        <button id="editSaveButton">Save Changes</button>
+        <button id="editCancelButton">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
   <script src="script/script.js"></script>
+  <script src="script/search.js"></script>
 </body>
 </html>

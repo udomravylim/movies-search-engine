@@ -9,19 +9,30 @@
 <body>
   <header>
     <h1 id="binderTitle">Movies in Binder</h1>
-    <button id="homeButton" onclick="goToHome()">Go to Home Page</button>
   </header>
-
   <div class="container">
-    <div id="movieList" class="movie-list"></div>
+    <div class="movie-list" id="movieList">
+      <!-- Movies will be dynamically loaded here -->
+    </div>
+    <button onclick="goBack()">Back to All Binders</button>
   </div>
-  
-  
-  <script>
-    function goToHome() {
-      window.location.href = "index.html";
-    }
-  </script>
+
+  <!-- Edit Movie Modal -->
+  <div id="editMovieModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>Edit Movie</h2>
+      <div class="form-group">
+        <input type="text" id="editTitleInput" placeholder="Movie Title" required>
+        <input type="text" id="editKindInput" placeholder="Genre" required>
+        <input type="number" id="editBinderInput" placeholder="Binder Number" required>
+        <input type="number" id="editPageInput" placeholder="Page Number" required>
+        <textarea id="editMoviesInput" placeholder="Movies in Collection (comma-separated, optional)"></textarea>
+        <button onclick="saveEdit()">Save Changes</button>
+        <button onclick="closeEditModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <script src="script/movies.js"></script>
 </body>
 </html>

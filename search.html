@@ -9,60 +9,84 @@
 <body>
   <header>
     <h1>Search Results</h1>
-    <button class="homeButton" onclick="goToHome()">Go to Home Page</button>
+    <button onclick="goToHome()">Go to Home Page</button>
   </header>
 
   <div class="container">
-    <div id="searchResults" class="movie-list"></div>
-    <button class="homeButton" onclick="goToHome()">Go to Home Page</button>
+    <div id="searchResults" class="movie-list">
+      <!-- Search results will be dynamically displayed here -->
+    </div>
   </div>
 
   <script>
+    // Go back to the home page
     function goToHome() {
-      window.location.href = "index.html";
+      window.location.href = 'index.html';
     }
 
-    // Fetch and display search results
-    document.addEventListener("DOMContentLoaded", () => {
+    // Load and display search results
+    document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const query = urlParams.get('query')?.toLowerCase();
+
+      console.log('Search Query:', query); // Debugging query
 
       if (!query) {
         document.getElementById('searchResults').innerHTML = '<p>No search term provided.</p>';
         return;
       }
 
-      fetch('movies.json')
-        .then(response => response.json())
-        .then(data => {
-          const results = data.filter(movie =>
-            movie.title.toLowerCase().includes(query) || movie.kind.toLowerCase().includes(query)
-          );
-
-          if (results.length > 0) {
-            displayResults(results);
-          } else {
-            document.getElementById('searchResults').innerHTML = '<p>No movies found matching your search.</p>';
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching movies:', error);
-          document.getElementById('searchResults').innerHTML = '<p>Error loading search results.</p>';
-        });
+      const storedMovies = localStorage.getItem('movies');
+      if (storedMovies) {
+        const moviesData = JSON.parse(storedMovies);
+        console.log('Loaded Movies from localStorage:', moviesData); // Debugging data
+        displaySearchResults(moviesData, query);
+      } else {
+        fetch('movies.json')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Failed to fetch movies.json');
+            }
+            return response.json();
+          })
+          .then(moviesData => {
+            console.log('Fetched Movies from movies.json:', moviesData); // Debugging data
+            displaySearchResults(moviesData, query);
+          })
+          .catch(error => {
+            console.error('Error fetching movies:', error);
+            document.getElementById('searchResults').innerHTML = '<p>Error loading search results. Please try again later.</p>';
+          });
+      }
     });
 
-    function displayResults(movies) {
+    function displaySearchResults(data, query) {
+      const results = data.filter(movie =>
+        (movie.title && movie.title.toLowerCase().includes(query)) ||
+        (movie.kind && movie.kind.toLowerCase().includes(query))
+      );
+
+      console.log('Filtered Results:', results); // Debugging filtered results
+
       const resultsContainer = document.getElementById('searchResults');
-      resultsContainer.innerHTML = ''; // Clear previous content
-      movies.forEach(movie => {
-        const movieItem = document.createElement('div');
-        movieItem.className = 'movie-item';
-        movieItem.innerHTML = `
-          <h3>${movie.title}</h3>
-          <p>Type: ${movie.kind} | Binder: ${movie.binder}, Page: ${movie.page}</p>
-        `;
-        resultsContainer.appendChild(movieItem);
-      });
+      if (results.length > 0) {
+        resultsContainer.innerHTML = results
+          .map(movie => `
+            <div class="movie-item">
+              <h3>${movie.title}</h3>
+              <p>Genre: ${movie.kind}</p>
+              <p>Binder: ${movie.binder} | Page: ${movie.page}</p>
+              ${
+                movie.movies
+                  ? `<p>Collection: ${movie.movies.join(', ')}</p>`
+                  : ''
+              }
+            </div>
+          `)
+          .join('');
+      } else {
+        resultsContainer.innerHTML = '<p>No movies found matching your search.</p>';
+      }
     }
   </script>
 </body>
